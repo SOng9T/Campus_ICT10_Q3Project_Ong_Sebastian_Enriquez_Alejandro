@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intramurals Eligibility Checker</title>
+
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.7.3/core.css">
+    <script type="module" src="https://pyscript.net/releases/2025.7.3/core.js"></script>
+
+    <style>
+        * { 
+            box-sizing: border-box; 
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body { 
+            background-color: #000000; 
+            margin: 0; 
+            padding: 30px 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh;
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background-color: #000000;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #333333;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+        
+        .nav-btn:hover { 
+            background-color: #1a1a1a;
+            border-color: #666666;
+        }
+        
+        .nav-btn:nth-child(1),
+        .nav-btn:nth-child(2),
+        .nav-btn:nth-child(3) { 
+            background-color: #000000;
+            border: 1px solid #333333;
+        }
+        
+        .container { 
+            background-color: #111111; 
+            border: 1px solid #333333;
+            padding: 30px; 
+            width: 100%; 
+            max-width: 600px; 
+            margin-top: 20px; 
+        }
+        
+        h1 { 
+            color: #ffffff; 
+            text-align: center; 
+            margin-bottom: 30px; 
+            font-size: 28px; 
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: normal;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #333333;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .form-group { 
+            margin-bottom: 20px; 
+        }
+        
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: normal; 
+            color: #dddddd;
+            font-family: 'Times New Roman', Times, serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        
+        select, input { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #333333; 
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 16px; 
+            transition: all 0.2s; 
+        }
+        
+        select:focus, input:focus { 
+            border-color: #666666; 
+            outline: none; 
+            background-color: #1a1a1a;
+        }
+        
+        select option {
+            background-color: #111111;
+            color: #ffffff;
+        }
+        
+        button { 
+            background-color: #000000; 
+            color: #ffffff; 
+            border: 1px solid #333333; 
+            padding: 14px 20px; 
+            font-size: 16px; 
+            font-weight: normal; 
+            cursor: pointer; 
+            width: 100%; 
+            transition: all 0.2s; 
+            margin-top: 10px;
+            font-family: 'Times New Roman', Times, serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        button:hover { 
+            background-color: #1a1a1a;
+            border-color: #666666;
+        }
+        
+        #output { 
+            margin-top: 30px; 
+            padding: 20px; 
+            font-size: 16px; 
+            line-height: 1.6; 
+            display: none; 
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        .eligible { 
+            background-color: #0a1a0a; 
+            border-left: 3px solid #2ecc71; 
+            color: #dddddd; 
+        }
+        
+        .not-eligible { 
+            background-color: #1a0a0a; 
+            border-left: 3px solid #e74c3c; 
+            color: #dddddd; 
+        }
+        
+        .team-images { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 15px; 
+            margin-top: 20px; 
+        }
+        
+        .team-images img { 
+            width: 100px; 
+            height: 100px; 
+            object-fit: contain; 
+            border: 2px solid #333333;
+            transition: all 0.2s; 
+            filter: grayscale(100%);
+        }
+        
+        .team-images img:hover { 
+            transform: scale(1.05);
+            border-color: #666666;
+            filter: grayscale(0%);
+        }
+        
+        .assigned-team { 
+            text-align: center; 
+            font-weight: normal; 
+            font-size: 20px; 
+            margin: 15px 0; 
+            padding: 10px; 
+            border: 1px solid #333333;
+            background-color: #0a0a0a;
+            font-family: 'Times New Roman', Times, serif;
+            color: #ffffff;
+        }
+        
+        footer { 
+            margin-top: 30px; 
+            text-align: center; 
+            color: #666666; 
+            font-size: 14px; 
+            font-family: 'Times New Roman', Times, serif;
+            border-top: 1px solid #222222;
+            padding-top: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .instructions { 
+            background-color: #0a0a0a; 
+            padding: 15px; 
+            margin-bottom: 20px; 
+            border-left: 3px solid #666666;
+            border: 1px solid #333333;
+        }
+        
+        .instructions h3 { 
+            margin-top: 0; 
+            color: #ffffff;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 16px;
+        }
+        
+        .instructions p {
+            color: #aaaaaa;
+            font-style: italic;
+        }
+        
+        #resetBtn {
+            background-color: #111111;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🏆 INTRAMURALS ELIGIBILITY CHECKER 🏆</h1>
+    
+    <div class="nav-bar">
+        <a href="index.html" class="nav-btn">HOME</a>
+        <a href="signup.html" class="nav-btn">SIGN UP</a>
+        <a href="players.html" class="nav-btn">PLAYERS LIST</a>
+    </div>
+    
+    <div class="container">
+        <div class="instructions">
+            <h3>INSTRUCTIONS:</h3>
+            <p>Fill in all the fields below to check your eligibility and get your team assignment!</p>
+        </div>
+        
+        <div class="form-group">
+            <label for="onlineReg">ONLINE REGISTRATION STATUS:</label>
+            <select id="onlineReg">
+                <option value="" selected disabled>Select an option</option>
+                <option value="yes">Yes, I am registered online</option>
+                <option value="no">No, I am not registered online</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="medicalClearance">MEDICAL CLEARANCE STATUS:</label>
+            <select id="medicalClearance">
+                <option value="" selected disabled>Select an option</option>
+                <option value="yes">Yes, I have medical clearance</option>
+                <option value="no">No, I don't have medical clearance</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="gradeLevel">GRADE LEVEL:</label>
+            <select id="gradeLevel">
+                <option value="" selected disabled>Select your grade level</option>
+                <option value="7">Grade 7</option>
+                <option value="8">Grade 8</option>
+                <option value="9">Grade 9</option>
+                <option value="10">Grade 10</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="section">SECTION (OPTIONAL):</label>
+            <input type="text" id="section" placeholder="Topaz, Emerald, Ruby, and Sapphire">
+        </div>
+        
+        <button id="checkBtn" type="button" py-click="check_eligibility">CHECK ELIGIBILITY</button>
+        <button id="resetBtn" type="button" py-click="reset_form">RESET FORM</button>
+    </div>
+    
+    <div class="container">
+        <div id="output"></div>
+        <div class="team-images" id="teamImages">
+            <img src="blue_bears.jpg.jpg" alt="Blue Bears" title="Blue Bears">
+            <img src="red_bulldogs.jpg.jpg" alt="Red Bulldogs" title="Red Bulldogs">
+            <img src="yellow_tigers.jpg.jpg" alt="Yellow Tigers" title="Yellow Tigers">
+            <img src="green_hornets.jpg.jpg" alt="Green Hornets" title="Green Hornets">
+        </div>
+    </div>
+    
+    <footer>
+        <p>GREENHILLS ICT10 - Q3 SEATWORK #2 | INTRAMURALS ELIGIBILITY SYSTEM (ONG)</p>
+    </footer>
+
+    <script type="py" src="main.py"></script>
+</body>
+</html>

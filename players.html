@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Players - Intramurals 2025</title>
+    
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.7.3/core.css">
+    <script type="module" src="https://pyscript.net/releases/2025.7.3/core.js"></script>
+    
+    <style>
+        * { 
+            box-sizing: border-box; 
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body { 
+            background-color: #000000; 
+            margin: 0; 
+            padding: 30px 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh;
+        }
+        
+        .container { 
+            background-color: #111111; 
+            border: 1px solid #333333;
+            padding: 35px; 
+            width: 100%; 
+            max-width: 900px; 
+            margin-top: 20px; 
+        }
+        
+        h1 { 
+            color: #ffffff; 
+            text-align: center; 
+            margin-bottom: 30px; 
+            font-size: 36px; 
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: normal;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #333333;
+            padding-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background-color: #000000;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 25px;
+            border: 1px solid #333333;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 16px;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+        
+        .nav-btn:hover { 
+            background-color: #1a1a1a;
+            border-color: #666666;
+        }
+        
+        /* monochromatic nav buttons */
+        .nav-btn:nth-child(1),
+        .nav-btn:nth-child(2),
+        .nav-btn:nth-child(3) { 
+            background-color: #000000;
+            border: 1px solid #333333;
+        }
+        
+        .players-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 12px;
+            margin: 25px 0;
+            max-height: 550px;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #0a0a0a;
+            border: 1px solid #222222;
+        }
+        
+        /* minimalist scrollbar */
+        .players-list::-webkit-scrollbar {
+            width: 8px;
+            background-color: #111111;
+        }
+        
+        .players-list::-webkit-scrollbar-thumb {
+            background-color: #333333;
+        }
+        
+        .player-card {
+            background-color: #111111;
+            color: #dddddd;
+            padding: 18px 12px;
+            border: 1px solid #222222;
+            text-align: center;
+            transition: all 0.2s;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        .player-card:hover {
+            background-color: #1a1a1a;
+            border-color: #444444;
+        }
+        
+        .player-name { 
+            font-size: 20px; 
+            margin-bottom: 8px; 
+            color: #ffffff;
+            font-family: 'Times New Roman', Times, serif;
+            letter-spacing: 0.5px;
+        }
+        
+        .player-grade { 
+            font-size: 14px; 
+            color: #888888;
+            font-style: italic;
+            border-top: 1px dotted #333333;
+            padding-top: 5px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            margin: 25px 0 15px;
+            padding: 20px;
+            background-color: #0a0a0a;
+            border: 1px solid #222222;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 48px;
+            font-weight: normal;
+            color: #ffffff;
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #888888;
+            letter-spacing: 2px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        footer { 
+            margin-top: 30px; 
+            text-align: center; 
+            color: #666666; 
+            font-size: 14px; 
+            font-family: 'Times New Roman', Times, serif;
+            border-top: 1px solid #222222;
+            padding-top: 20px;
+            width: 100%;
+            max-width: 900px;
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 10px;
+        }
+        
+        .action-btn {
+            background-color: #000000;
+            color: #ffffff;
+            border: 1px solid #333333;
+            padding: 12px 35px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Times New Roman', Times, serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .action-btn:hover { 
+            background-color: #1a1a1a;
+            border-color: #666666;
+        }
+        
+        .subtitle {
+            font-family: 'Times New Roman', Times, serif;
+            color: #888888;
+            text-align: center;
+            margin: 10px 0;
+            font-size: 16px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>INTRAMURALS 2025 · PLAYERS REGISTRY</h1>
+    
+    <div class="nav-bar">
+        <a href="index.html" class="nav-btn">HOME</a>
+        <a href="signup.html" class="nav-btn">SIGN UP</a>
+        <a href="teamchecker.html" class="nav-btn">TEAM CHECKER</a>
+    </div>
+    
+    <div class="container">
+        <div class="btn-container">
+            <button class="action-btn" py-click="display_players">REFRESH</button>
+        </div>
+        
+        <div class="subtitle">
+            registered participants
+        </div>
+        
+        <div class="stats" id="stats"></div>
+        
+        <div class="players-list" id="playersList"></div>
+        
+        <p style="text-align: center; color: #666666; margin-top: 15px; font-family: 'Times New Roman', Times, serif; font-size: 14px; font-style: italic;">
+            23 players · intramurals 2025
+        </p>
+    </div>
+    
+    <footer>
+        <p>greenhills ict10 · q3 project · list of players (ong)</p>
+    </footer>
+
+    <script type="py" src="players.py"></script>
+</body>
+</html>

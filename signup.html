@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Intramurals 2025</title>
+    
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.7.3/core.css">
+    <script type="module" src="https://pyscript.net/releases/2025.7.3/core.js"></script>
+    
+    <style>
+        * { 
+            box-sizing: border-box; 
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body { 
+            background-color: #000000; 
+            margin: 0; 
+            padding: 30px 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh;
+        }
+        
+        .container { 
+            background-color: #111111; 
+            border: 1px solid #333333;
+            padding: 35px; 
+            width: 100%; 
+            max-width: 600px; 
+            margin-top: 20px; 
+        }
+        
+        h1 { 
+            color: #ffffff; 
+            text-align: center; 
+            margin-bottom: 30px; 
+            font-size: 28px; 
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: normal;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #333333;
+            padding-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background-color: #000000;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #333333;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+        
+        .nav-btn:hover { 
+            background-color: #1a1a1a;
+            border-color: #666666;
+        }
+        
+        .nav-btn:nth-child(1),
+        .nav-btn:nth-child(2),
+        .nav-btn:nth-child(3) { 
+            background-color: #000000;
+            border: 1px solid #333333;
+        }
+        
+        .form-group { 
+            margin-bottom: 20px; 
+        }
+        
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: normal; 
+            color: #dddddd;
+            font-family: 'Times New Roman', Times, serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        
+        input, select { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #333333; 
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 16px; 
+            transition: all 0.2s; 
+        }
+        
+        input:focus, select:focus { 
+            border-color: #666666; 
+            outline: none; 
+            background-color: #1a1a1a;
+        }
+        
+        select option {
+            background-color: #111111;
+            color: #ffffff;
+        }
+        
+        button { 
+            background-color: #000000; 
+            color: #ffffff; 
+            border: 1px solid #333333; 
+            padding: 14px 20px; 
+            font-size: 16px; 
+            font-weight: normal; 
+            cursor: pointer; 
+            width: 100%; 
+            transition: all 0.2s; 
+            margin-top: 10px;
+            font-family: 'Times New Roman', Times, serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        button:hover { 
+            background-color: #1a1a1a;
+            border-color: #666666;
+        }
+        
+        #output { 
+            margin-top: 30px; 
+            padding: 20px; 
+            font-size: 16px; 
+            line-height: 1.6; 
+            display: none; 
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        .success { 
+            background-color: #0a1a0a; 
+            border-left: 3px solid #2ecc71; 
+            color: #dddddd; 
+        }
+        
+        .error { 
+            background-color: #1a0a0a; 
+            border-left: 3px solid #e74c3c; 
+            color: #dddddd; 
+        }
+        
+        footer { 
+            margin-top: 30px; 
+            text-align: center; 
+            color: #666666; 
+            font-size: 14px; 
+            font-family: 'Times New Roman', Times, serif;
+            border-top: 1px solid #222222;
+            padding-top: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .password-requirements {
+            font-size: 12px;
+            color: #888888;
+            margin-top: 5px;
+            padding-left: 5px;
+            font-style: italic;
+        }
+        
+        #resetBtn {
+            background-color: #111111;
+        }
+    </style>
+</head>
+<body>
+    <h1>📝 INTRAMURALS 2025 SIGN UP PAGE</h1>
+    
+    <div class="container">
+        <div class="nav-bar">
+            <a href="index.html" class="nav-btn">HOME</a>
+            <a href="teamchecker.html" class="nav-btn">TEAM CHECKER</a>
+            <a href="players.html" class="nav-btn">PLAYERS LIST</a>
+        </div>
+        
+        <div class="form-group">
+            <label for="fullname">FULL NAME:</label>
+            <input type="text" id="fullname" placeholder="Enter your full name">
+        </div>
+        
+        <div class="form-group">
+            <label for="grade">GRADE LEVEL:</label>
+            <select id="grade">
+                <option value="" selected disabled>Select grade level</option>
+                <option value="7">Grade 7</option>
+                <option value="8">Grade 8</option>
+                <option value="9">Grade 9</option>
+                <option value="10">Grade 10</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="section">SECTION:</label>
+            <select id="section">
+                <option value="" selected disabled>Select section</option>
+                <option value="Topaz">Topaz</option>
+                <option value="Emerald">Emerald</option>
+                <option value="Ruby">Ruby</option>
+                <option value="Sapphire">Sapphire</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">EMAIL ADDRESS:</label>
+            <input type="email" id="email" placeholder="student@obmc.edu.ph">
+        </div>
+        
+        <div class="form-group">
+            <label for="password">PASSWORD:</label>
+            <input type="password" id="password" placeholder="Create a password">
+            <div class="password-requirements">Must be at least 8 characters long! thats what bro said</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="confirm_password">CONFIRM PASSWORD:</label>
+            <input type="password" id="confirm_password" placeholder="Re-enter password">
+        </div>
+        
+        <button id="signupBtn" type="button" py-click="sign_up">CREATE ACCOUNT</button>
+        <button id="resetBtn" type="button" py-click="reset_form">CLEAR FORM</button>
+    </div>
+    
+    <div class="container">
+        <div id="output"></div>
+    </div>
+    
+    <footer>
+        <p>GREENHILLS ICT10 - Q3 PROJECT | SIGN UP PAGE (ONG)</p>
+    </footer>
+
+    <script type="py" src="signup.py"></script>
+</body>
+</html>
